@@ -29,3 +29,7 @@ img {
   padding: var(--spacing);
   filter: blur(var(--blur));
 }
+
+.hl {
+  color: var(--base);
+}
