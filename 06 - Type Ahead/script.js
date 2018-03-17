@@ -17,21 +17,25 @@ function findMatches(wordToMatch, cities) {
 
 // displayMatch function
 function displayMatch() {
-    const matchArray = findMatches(this.value, cities)
+    const matchArray = findMatches(this.value, cities);
     const html = matchArray.map(place => {
-        const regex = new RegExp(this.value, "gi")
+        const regex = new RegExp(this.value, "gi");
+        const formattedPop = numberWithCommas(place.population);
+
         const city = place.city.replace(regex, `<span class="hl">${this.value}</span>`)
         const state = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
         return `
         <li>
-        <span class="name">${city}, ${state}</span>
+        <span class="name">${city}, ${state}</span><span class="population">${formattedPop}</span>
         </li>
         `;
     }).join('');
     suggestions.innerHTML = html;
 }
 
-
+const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 const searchInput = document.querySelector('.search');
 const suggestions = document.querySelector('.suggestions')
 
